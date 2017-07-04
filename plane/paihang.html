@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			ul,li{
+				list-style: none;
+			}
+			ul{
+				width:400px;
+				
+				border:1px solid blue;
+				margin:20px auto;
+				text-align: center;
+			}
+			#ul li{
+				color:orange;
+			}
+		</style>
+		<script src="ajax.js"></script>
+		<script>
+			onload=function(){
+				var olist=document.getElementById("list")
+				olist.onscroll=1000
+				ajax({
+					type:"get",
+					url:" http://60.205.181.47/myPHPCode4/getRank.php",
+					async:true,
+					data:{},
+					success:function(result){
+						var arrStr=JSON.parse(result)
+						for(j=0;j<arrStr.length;j++){
+							var obj=arrStr[j]
+							var li=document.createElement("li");
+							    li.innerHTML=obj.name+","+obj.score;
+							    olist.appendChild(li)
+						}
+						
+						//console.log(arrStr)
+						
+					}
+				  }
+				)
+				
+			
+			}
+		
+		
+		</script>
+	</head>
+	<body>
+		<ul id="list"></ul>
+	</body>
+</html>
